@@ -1,1 +1,1 @@
-Chatbot con personlaida, diseñado con la API de Pollinations
+Chatbot con personlidad, diseñado con la API de Pollinations
