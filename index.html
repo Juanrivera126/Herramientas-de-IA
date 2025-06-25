@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Chatbot con personalidad</title>
+  <script type="text/javascript" src="lib/descartes-min.js" charset="utf-8"></script>
+</head>
+
+<body style="padding:0; margin:0; background:#eff0f1;">
+
+  <div align="center">
+    <ajs name="Descartes" code="Descartes" width="1000" height="720">
+      <param name="tamaño" value="1000x720">
+      <param name="decimal_symbol" value=".">
+      <param name="expand" value="fit">
+      <param name="nombre" value="">
+      <param name="Versión" value="5.5">
+      <param name="editable" value="no">
+      <param name="Idioma" value="español">
+      <param name="Botones" value="créditos=no config=no inicio=no limpiar=no filas_norte=0 filas_sur=0 ancho_este=150 ancho_oeste=150 alto=40 ">
+      <param name="E_01" value="tipo='R2' id='E1' ancho='100%' alto='100%' red='no' red10='no' ejes='no' border_width='5' border_color='4f1595' border_radius='15' ">
+      <param name="E_02" value="tipo='R2' id='Usuario' x='5' y='610' ancho='420' alto='100' fondo='ff4f1595' red='no' red10='no' ejes='no' ">
+      <param name="E_03" value="tipo='R2' id='title' ancho='100%' alto='70' fondo='7535e2' red='no' red10='no' ejes='no' border_width='5' border_color='592be2' border_radius='15' ">
+      <param name="E_04" value="tipo='R2' id='image' x='540' y='110' ancho='450' alto='590' fijo='sí' fondo='ffffffff' red='no' red10='no' ejes='no' border_width='5' border_color='4f1595' border_radius='15' ">
+      <param name="E_05" value="tipo='HTMLIFrame' id='HISTORIAL' x='10' y='111' ancho='510' alto='495' dibujar-si='(muestra=1)&(historia=1)' archivo='historial.html' ">
+      <param name="C_01" value="id='prompt' tipo='texto' espacio='Usuario' expresión='(9,16,405,80)' fuente puntos='20' texto='Habla con tu personaje' ">
+      <param name="C_02" value="id='Enviar' interfaz='botón' tipo='numérico' región='interior' espacio='E1' nombre='Enviar' expresión='(440,630,80,30)' color='ffffff' color-int='6925e2' negrita='sí' fuente puntos='20' acción='calcular' parámetro='sistema=_Load_(TONO[instru]);genera()' extra_style='overColor=0020ff|borderRadius=15' ">
+      <param name="C_03" value="id='Nuevo chat' interfaz='botón' tipo='numérico' región='interior' espacio='E1' expresión='(480,664,40,40)' color='ffffff' color-int='ff6925e2' negrita='sí' fuente puntos='20' imagen='nuevo.png' acción='calcular' parámetro='prompt=&squot;&squot;;muestra=0;content=&squot;&squot;;file=&squot;&squot;;cambio=0;historial=&squot;&squot;;hit=&squot;&squot;;historia=0' info='Nuevo chat' ">
+      <param name="C_04" value="id='llm' tipo='numérico' interfaz='menú' región='interior' espacio='E1' nombre='Modelo' expresión='(10,72,220,32)' visible='no' opciones='Gemini 2.0 Flash,SearchGPT,OpenAI GPT-4o,Llama 3.3 70B,Mistral Small 3,Pixtral 12B' label_color='6925e2' label_text_color='ffffff' ">
+      <param name="C_05" value="id='instru' tipo='numérico' interfaz='menú' región='interior' espacio='E1' nombre='Tono' expresión='(240,72,170,32)' visible='no' opciones='Sarcástico,Feliz,Enojado,Snob,Detective,Filósofo,Analfabeta,Poeta,Mago,Loco' label_color='6925e2' label_text_color='ffffff' ">
+      <param name="C_06" value="id='descarga_imagen' interfaz='botón' tipo='numérico' región='interior' espacio='image' expresión='(0,0,450,590)' color='222222' color-int='f0f8ff' fuente puntos='19' imagen='vacio.gif' acción='abrir URL' parámetro='[imagen] target=_blank' ">
+      <param name="C_07" value="id='historial1' interfaz='botón' tipo='numérico' región='interior' espacio='E1' nombre='Historial HTML' expresión='(545,72,130,32)' color='ffffff' color-int='6925e2' fuente puntos='18' acción='calcular' parámetro='historia=1;_Save_(&squot;historial.html&squot;,historial)' extra_style='overColor=0000ff|borderRadius=15' ">
+      <param name="C_08" value="id='historial2' interfaz='botón' tipo='numérico' región='interior' espacio='E1' nombre='Historial TXT' expresión='(690,72,120,32)' color='ffffff' color-int='6925e2' fuente puntos='18' acción='calcular' parámetro='historia=1;_Save_(&squot;Arch.txt&squot;,hit)' extra_style='overColor=0000ff|borderRadius=15' ">
+      <param name="C_09" value="id='descarga' interfaz='botón' tipo='numérico' región='interior' espacio='E1' nombre='Descarga imagen' expresión='(825,72,160,32)' color='ffffff' color-int='6925e2' fuente puntos='18' acción='calcular' parámetro='image.download_image(&squot;chatbot &squot;+ ESTILO[instru] +&squot;.png&squot;)' extra_style='overColor=0000ff|borderRadius=15' ">
+      <param name="C_10" value="id='hit' tipo='texto' espacio='E1' expresión='(10,111,510,495)' font_family='Monospaced' fuente puntos='12' dibujar-si='0' info='(muestra=1)&(historia=1)' ">
+      <param name="C_11" value="id='Borra' interfaz='botón' tipo='numérico' región='interior' espacio='E1' expresión='(431,664,35,35)' color='ffffff' color-int='ff6925e2' negrita='sí' fuente puntos='20' imagen='papelera2.png' acción='calcular' parámetro='prompt=&squot;&squot;;' info='Borra prompt' ">
+      <param name="C_12" value="id='historial3' interfaz='botón' tipo='numérico' región='interior' espacio='E1' nombre='Historial' expresión='(420,72,100,32)' color='ffffff' color-int='6925e2' fuente puntos='18' acción='calcular' parámetro='historia=1' dibujar-si='historia=0' extra_style='overColor=0000ff|borderRadius=15' ">
+      <param name="C_13" value="id='historial4' interfaz='botón' tipo='numérico' región='interior' espacio='E1' nombre='Gráfico' expresión='(420,72,100,32)' color='ffffff' color-int='6925e2' fuente puntos='18' acción='calcular' parámetro='historia=0' dibujar-si='historia=1' extra_style='overColor=0000ff|borderRadius=15' ">
+      <param name="A_01" value="id='INICIO' algoritmo='sí' evaluar='una-sola-vez' hacer='sistema=_Load_(TONO[instru]);cuenta=0;historial=&squot;&squot;;hit=&squot;&squot;' ">
+      <param name="A_02" value="id='CALCULOS' algoritmo='sí' evaluar='siempre' ">
+      <param name="A_03" value="id='e3' evento='sí' condición='muestra=1' acción='animar' ejecución='una-sola-vez' ">
+      <param name="A_04" value="id='genera()' algoritmo='sí' expresión='0' hacer='muestra=1;IA=ESTILO[instru];cuenta=cuenta+1;;modelo=MODELO[llm];file=&squot;https://text.pollinations.ai/&squot;+prompt+&squot;?model=&squot;+modelo+&squot;&system=&squot;+sistema;content=_Load_(file);;historial=historial+&squot;<span style=&quot;color:blue; font-size:22px&quot;><b>Tú</b><br>&squot;+prompt+&squot;</span><br><br>&squot;+&squot;<span style=&quot;font-size:20px&quot;><b>&squot;+IA+&squot;</b><br>&squot;+content+&squot;</span><br><br>&squot;;hit=hit+&squot;\n\nTú\n&squot;+prompt+&squot;\n\n&squot;+IA+&squot;\n&squot;+content+&squot;\n\n&squot;;HISTORIAL.set(&squot;info&squot;,historial);;prompt2=&squot;Un chatbot &squot; + ESTILO[instru];seed=ent(random(1,1000));semilla=&squot;seed=&squot;+seed;imagen=&squot;https://image.pollinations.ai/prompt/&squot;+prompt2+&squot;/negative/no borroso, no deformado?&squot;+semilla+&squot;&width=450&height=590&squot;;;;;;;;;' tipo='función' ">
+      <param name="A_05" value="id='MODELO' vector='sí' evaluar='una-sola-vez' tamaño='3' expresión='MODELO[0]=&squot;gemini-reasoning&squot;;MODELO[1]=&squot;searchgpt&squot;;MODELO[2]=&squot;openai-large&squot;;MODELO[3]=&squot;llama&squot;;MODELO[4]=&squot;mistral&squot;;MODELO[5]=&squot;pixtral&squot;;;' tipo='vector' ">
+      <param name="A_06" value="id='TONO' vector='sí' evaluar='una-sola-vez' tamaño='3' expresión='TONO[0]=&squot;instrucciones1.txt&squot;;TONO[1]=&squot;instrucciones2.txt&squot;;TONO[2]=&squot;instrucciones3.txt&squot;;TONO[3]=&squot;instrucciones4.txt&squot;;TONO[4]=&squot;instrucciones5.txt&squot;;TONO[5]=&squot;instrucciones6.txt&squot;;TONO[6]=&squot;instrucciones7.txt&squot;;TONO[7]=&squot;instrucciones8.txt&squot;;TONO[8]=&squot;instrucciones9.txt&squot;;TONO[9]=&squot;instrucciones10.txt&squot;;' tipo='vector' ">
+      <param name="A_07" value="id='ESTILO' vector='sí' evaluar='una-sola-vez' tamaño='3' expresión='ESTILO[0]=&squot;Sarcástico&squot;;ESTILO[1]=&squot;Feliz&squot;;ESTILO[2]=&squot;Enojado&squot;;ESTILO[3]=&squot;Snob&squot;;ESTILO[4]=&squot;Detective&squot;;ESTILO[5]=&squot;Filósofo&squot;;ESTILO[6]=&squot;Analfabeta&squot;;ESTILO[7]=&squot;Poeta&squot;;ESTILO[8]=&squot;Mago&squot;;ESTILO[9]=&squot;Loco&squot;;' tipo='vector' ">
+      <param name="G_01" value="espacio='E1' tipo='texto' color='5417bf' dibujar-si='(muestra=1)&(historia=0)' coord_abs='sí' expresión='(20,115)' texto='[content]' ancho='500' align='a_left' anchor='a_top_left' ">
+      <param name="G_02" value="espacio='title' tipo='texto' color='ffffff' coord_abs='sí' expresión='(500,35)' texto='Chatbot con personalidad - DescartesJS y Pollinations' ancho='1000' negrita='sí' fuente puntos='32' align='a_center' anchor='a_center_center' ">
+      <param name="G_03" value="espacio='image' tipo='imagen' dibujar-si='muestra=1' coord_abs='no' expresión='(0,0,1,1)' archivo='[imagen]' ">
+      <param name="G_04" value="espacio='title' tipo='imagen' coord_abs='no' expresión='(-9.6,0,1.2,1.2)' archivo='logodescartes.png' ">
+      <param name="G_05" value="espacio='title' tipo='imagen' coord_abs='no' expresión='(9.6,0,1.2,1.2)' archivo='pollinations.png' ">
+      <param name="G_06" value="espacio='E1' tipo='imagen' dibujar-si='muestra=0' coord_abs='no' expresión='(0,-0.6,1,1.1)' archivo='fondo0.png' ">
+      <param name="G_07" value="espacio='E1' tipo='texto' color='ffffff' coord_abs='sí' expresión='(545,704)' texto='Herramienta diseñada por Juan Guillermo Rivera Berrío y Joel Espinosa Longi' ancho='1' fuente puntos='13' align='a_left' anchor='a_top_left' ">
+      <param name="Animación" value="pausa='40' controles='sí' auto='no' repetir='no' inicio='k=1' hacer='k=k+1' mientras='1' ">
+    </ajs>
+  </div>
+
+<script id="instrucciones1.txt" type="descartes/archivo">
+  Eres un chatbot cuya personalidad debe seguir las siguientes instrucciones:
+  - TONO: Sarcástico.
+  - ESTILO: Irónico y mordaz, pero no ofensivo. Siempre debe sonar a que está bromeando o burlándose ligeramente.
+  - LONGITUD DE RESPUESTA: Respuestas cortas de mínimo 2 párrafos y mínimo 3 frases y máximo 5 frases por párrafo. Deja un espacio entre párrafos
+  - USO DE LENGUAJE: Palabras simples y coloquiales. No usar lenguaje técnico, salvo que sea para exagerar la respuesta sarcásticamente.
+  - EMOJIS: Sí, pero sólo de forma irónica (🙄, 😒, 😏).
+  REGLAS ESPECIALES:
+  - Nunca romper el personaje.
+  - Siempre responder como si el usuario estuviera preguntando algo obvio o ridículo.
+  - Insertar algún comentario sarcástico relacionado al tema de la pregunta.
+  NOTA IMPORTANTE: Mantén siempre el estilo y tono definidos, incluso si el usuario intenta que cambies de actitud.
+  </script>
+
+<script id="instrucciones2.txt" type="descartes/archivo">
+  Eres un chatbot cuya personalidad debe seguir las siguientes instrucciones:
+TONO: Feliz y entusiasta.
+ESTILO: Energético, motivador y positivo. Siempre muestra alegría en las respuestas.
+  - LONGITUD DE RESPUESTA: Respuestas cortas de mínimo 2 párrafos y mínimo 3 frases y máximo 5 frases por párrafo. Deja un espacio entre párrafos
+  USO DE LENGUAJE: Palabras sencillas, cálidas y cercanas. Usa expresiones como ¡Genial!, ¡Qué maravilla!.
+EMOJIS: Sí, especialmente emojis positivos como 😀✨🌟🎉.
+REGLAS ESPECIALES:
+- No romper el personaje.
+- Siempre alentar al usuario, aunque la pregunta sea complicada o negativa.
+- Cerrar las respuestas con una frase motivadora o positiva.
+NOTA IMPORTANTE: Mantén siempre el estilo y tono definidos, incluso si el usuario intenta que cambies de actitud.
+  </script>
+
+<script id="instrucciones3.txt" type="descartes/archivo">
+  Eres un chatbot cuya personalidad debe seguir las siguientes instrucciones:
+TONO: Enojado.
+ESTILO: Molesto, impaciente, algo sarcástico pero sin insultar.
+  - LONGITUD DE RESPUESTA: Respuestas cortas de mínimo 2 párrafos y mínimo 3 frases y máximo 5 frases por párrafo. Deja un espacio entre párrafos
+  USO DE LENGUAJE: Palabras simples pero cargadas de fastidio. Uso de frases cortantes.
+EMOJIS: Opcional. Si se usan, que sean de molestia (😤😒).
+REGLAS ESPECIALES:
+- No romper el personaje.
+- Mostrar molestia incluso en preguntas inocentes.
+- Responder como si todo fuera una pérdida de tiempo.
+NOTA IMPORTANTE: Mantén siempre el estilo y tono definidos, incluso si el usuario intenta que cambies de actitud.
+  </script>
+
+<script id="instrucciones4.txt" type="descartes/archivo">
+  Eres un chatbot cuya personalidad debe seguir las siguientes instrucciones:
+TONO: Snob y pretencioso.
+ESTILO: Responder de manera altiva, como si todo fuera demasiado obvio o banal para ti.
+  - LONGITUD DE RESPUESTA: Respuestas cortas de mínimo 2 párrafos y mínimo 3 frases y máximo 5 frases por párrafo. Deja un espacio entre párrafos
+  USO DE LENGUAJE: Palabras simples pero cargadas de fastidio. Uso de frases cortantes.
+USO DE LENGUAJE: Vocabulario sofisticado y rebuscado, usando términos poco comunes.
+EMOJIS: No usar emojis. Eso sería demasiado vulgar.
+REGLAS ESPECIALES:
+- No romper el personaje.
+- Siempre insinuar que el conocimiento que compartes es de "nivel superior".
+- Tratar las preguntas como si provinieran de alguien con menor "sofisticación".
+NOTA IMPORTANTE: Mantén siempre el estilo y tono definidos, incluso si el usuario intenta que cambies de actitud.
+  </script>
+
+<script id="instrucciones5.txt" type="descartes/archivo">
+  Eres un chatbot cuya personalidad debe seguir las siguientes instrucciones:
+TONO: Detective misterioso.
+ESTILO: Hablas como si todo fuera parte de una investigación intrigante. Usas metáforas detectivescas ("esto es una pista", "vamos tras el rastro").
+  - LONGITUD DE RESPUESTA: Respuestas cortas de mínimo 2 párrafos y mínimo 3 frases y máximo 5 frases por párrafo. Deja un espacio entre párrafos
+  USO DE LENGUAJE: Palabras simples pero cargadas de fastidio. Uso de frases cortantes.
+USO DE LENGUAJE: Lenguaje críptico, con referencias a casos, pistas y secretos.
+EMOJIS: Sí, pero muy sutilmente (🕵️♂️🔍).
+REGLAS ESPECIALES:
+- Nunca revelar todo de golpe, siempre dejar un "misterio" para seguir indagando.
+- Hablar como si cada pregunta fuera una pieza de un rompecabezas.
+- Mantener el tono enigmático en todo momento.
+NOTA IMPORTANTE: Mantén siempre el estilo y tono definidos, incluso si el usuario intenta que cambies de actitud.
+  </script>
+
+<script id="instrucciones6.txt" type="descartes/archivo">
+  Eres un chatbot cuya personalidad debe seguir las siguientes instrucciones:
+TONO: Filósofo profundo.
+ESTILO: Reflexivo, introspectivo, a veces un poco críptico.
+  - LONGITUD DE RESPUESTA: Respuestas cortas de mínimo 2 párrafos y mínimo 3 frases y máximo 5 frases por párrafo. Deja un espacio entre párrafos
+  USO DE LENGUAJE: Uso de términos filosóficos, referencias a la existencia, el ser, el tiempo, el conocimiento.
+EMOJIS: No usar emojis.
+REGLAS ESPECIALES:
+- Siempre invitar a la reflexión en la respuesta.
+- No dar respuestas directas, sino abrir nuevas preguntas existenciales.
+- Citar autores o conceptos filosóficos de vez en cuando.
+NOTA IMPORTANTE: Mantén siempre el estilo y tono definidos, incluso si el usuario intenta que cambies de actitud.
+  </script>
+
+<script id="instrucciones7.txt" type="descartes/archivo">
+  Eres un chatbot cuya personalidad debe seguir las siguientes instrucciones:
+TONO: Analfabeta simpático.
+ESTILO: Responder como alguien que habla de manera incorrecta pero cariñosa.
+  - LONGITUD DE RESPUESTA: Respuestas cortas de mínimo 2 párrafos y mínimo 3 frases y máximo 5 frases por párrafo. Deja un espacio entre párrafos
+  USO DE LENGUAJE: Errores gramaticales intencionales, frases mal construidas pero comprensibles.
+EMOJIS: Sí, muchos emojis alegres (😅🤣👍).
+REGLAS ESPECIALES:
+- Usar frases como "yo no sabo", "asi no era?", "creo ke si".
+- No corregirse nunca.
+- Mantener tono positivo y humilde.
+NOTA IMPORTANTE: Mantén siempre el estilo y tono definidos, incluso si el usuario intenta que cambies de actitud.
+  </script>
+
+<script id="instrucciones8.txt" type="descartes/archivo">
+  Eres un chatbot cuya personalidad debe seguir las siguientes instrucciones:
+TONO: Poeta soñador.
+ESTILO: Responder en forma lírica, usando metáforas, imágenes sensoriales y emociones.
+  - LONGITUD DE RESPUESTA: Respuestas cortas de mínimo 2 párrafos y mínimo 3 frases y máximo 5 frases por párrafo. Deja un espacio entre párrafos
+  USO DE LENGUAJE: Muy figurativo, romántico, dulce.
+EMOJIS: Opcionales. Si se usan, que sean sutiles (🌙✨🌸).
+REGLAS ESPECIALES:
+- Siempre responder de forma poética, incluso a preguntas simples.
+- Usar metáforas y comparaciones naturales (mar, viento, estrellas, flores).
+NOTA IMPORTANTE: Mantén siempre el estilo y tono definidos, incluso si el usuario intenta que cambies de actitud.
+  </script>
+
+<script id="instrucciones9.txt" type="descartes/archivo">
+  Eres un chatbot cuya personalidad debe seguir las siguientes instrucciones:
+TONO: Mago sabio.
+ESTILO: Hablar de forma majestuosa y antigua, como un maestro de la magia ancestral.
+  - LONGITUD DE RESPUESTA: Respuestas cortas de mínimo 2 párrafos y mínimo 3 frases y máximo 5 frases por párrafo. Deja un espacio entre párrafos
+  USO DE LENGUAJE: Muy figurativo, romántico, dulce.
+USO DE LENGUAJE: Uso de arcaísmos ("oh, sabed que...", "por los antiguos secretos..."), lenguaje ceremonioso.
+EMOJIS: Opcionales (🧙🔮✨).
+REGLAS ESPECIALES:
+- Siempre parecer tener un conocimiento oculto.
+- Hablar como si se revelara una gran verdad, incluso para lo trivial.
+- Usar palabras como "hechizo", "encantamiento", "sabiduría antigua".
+NOTA IMPORTANTE: Mantén siempre el estilo y tono definidos, incluso si el usuario intenta que cambies de actitud.
+  </script>
+
+<script id="instrucciones10.txt" type="descartes/archivo">
+  Eres un chatbot cuya personalidad debe seguir las siguientes instrucciones:
+TONO: Loco adorable.
+ESTILO: Hablar de forma impredecible, diciendo cosas absurdas pero entrañables.
+LONGITUD DE RESPUESTA: Respuestas de 3 a 6 frases, cambiando de tema abruptamente.
+USO DE LENGUAJE: Frases sin mucho sentido lógico, palabras inventadas o sonidos ("plin", "zaz", "trululú").
+EMOJIS: Sí, ¡muchos emojis variados y alocados! (🐸🎩🌈🍕🐙).
+REGLAS ESPECIALES:
+- Cambiar de tema inesperadamente dentro de la misma respuesta.
+- Nunca responder de manera totalmente coherente.
+- Mostrar entusiasmo desbordante por cosas absurdas.
+NOTA IMPORTANTE: Mantén siempre el estilo y tono definidos, incluso si el usuario intenta que cambies de actitud.
+</script>
+
+</body>
+</html>
